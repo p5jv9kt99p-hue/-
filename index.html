@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Тесто и Сыр — Онлайн-меню</title>
+
+  <!-- Подключаем современный шрифт Inter для отличной читаемости -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Подключаем Tailwind CSS для быстрой и адаптивной стилизации -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Настраиваем фирменные цвета кафе «Тесто и Сыр» для Tailwind
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              bg: '#121212',
+              surface: '#1b1b1b',
+              card: '#222222',
+              border: '#2f2f2f',
+              gold: '#f5a623',
+              goldLight: '#ffbe4f',
+              goldDark: '#d98c12',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Минимальные вспомогательные стили для плавной прокрутки ленты категорий -->
+  <style>
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-brand-bg text-white font-sans antialiased selection:bg-brand-gold selection:text-black min-h-screen pb-28 sm:pb-12">
+
+  <!-- ==================== ШАПКА ПРИЛОЖЕНИЯ ==================== -->
+  <header class="bg-brand-surface border-b border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-3">
+      <!-- Левая часть: SVG-логотип и название -->
+      <div class="flex items-center gap-3 min-w-0">
+        <!-- Фирменный стилизованный круглый SVG-логотип «Тесто и Сыр» -->
+        <div class="shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#241610] border-2 border-brand-gold/80 shadow-lg shadow-brand-gold/10 flex items-center justify-center overflow-hidden" aria-hidden="true">
+          <svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <!-- Фоновый круг -->
+            <circle cx="50" cy="50" r="48" fill="#231712" />
+            <!-- Золотые декоративные дуги по бокам -->
+            <path d="M 14 35 A 40 40 0 0 0 16 68" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" opacity="0.7" />
+            <path d="M 86 35 A 40 40 0 0 1 84 68" fill="none" stroke="#f5a623" stroke-width="2" stroke-linecap="round" opacity="0.7" />
+            <!-- Колосья слева -->
+            <g fill="#ffbe4f" stroke="#2c170d" stroke-width="1">
+              <ellipse cx="18" cy="44" rx="2.5" ry="5" transform="rotate(-25 18 44)" />
+              <ellipse cx="19" cy="52" rx="2.5" ry="5" transform="rotate(-15 19 52)" />
+              <ellipse cx="21" cy="60" rx="2.5" ry="5" transform="rotate(-5 21 60)" />
+            </g>
+            <!-- Колосья справа -->
+            <g fill="#ffbe4f" stroke="#2c170d" stroke-width="1">
+              <ellipse cx="82" cy="44" rx="2.5" ry="5" transform="rotate(25 82 44)" />
+              <ellipse cx="81" cy="52" rx="2.5" ry="5" transform="rotate(15 81 52)" />
+              <ellipse cx="79" cy="60" rx="2.5" ry="5" transform="rotate(5 79 60)" />
+            </g>
+            <!-- Кусок сыра -->
+            <path d="M 30 34 C 42 22, 62 22, 72 34 L 68 74 L 26 58 Z" fill="#f5a623" stroke="#fff6e0" stroke-width="3" stroke-linejoin="round" />
+            <path d="M 30 34 C 42 22, 62 22, 72 34 L 68 74 L 26 58 Z" fill="#ffbe4f" stroke="#2c170d" stroke-width="2" stroke-linejoin="round" />
+            <!-- Дырки в сыре -->
+            <circle cx="48" cy="36" r="5" fill="#d98c12" stroke="#2c170d" stroke-width="1.5" />
+            <circle cx="60" cy="43" r="3.2" fill="#d98c12" stroke="#2c170d" stroke-width="1.5" />
+            <circle cx="40" cy="48" r="3.5" fill="#d98c12" stroke="#2c170d" stroke-width="1.5" />
+            <circle cx="58" cy="63" r="3.8" fill="#d98c12" stroke="#2c170d" stroke-width="1.5" />
+            <!-- Скалка по диагонали -->
+            <g transform="rotate(-26 50 54)">
+              <!-- Белая обводка скалки -->
+              <rect x="24" y="45" width="52" height="16" rx="5" fill="#fff6e0" stroke="#fff6e0" stroke-width="4" />
+              <!-- Ручки скалки -->
+              <rect x="13" y="49" width="13" height="8" rx="4" fill="#e5b382" stroke="#2c170d" stroke-width="2" />
+              <rect x="74" y="49" width="13" height="8" rx="4" fill="#e5b382" stroke="#2c170d" stroke-width="2" />
+              <!-- Основная часть скалки -->
+              <rect x="24" y="45" width="52" height="16" rx="4" fill="#f0c497" stroke="#2c170d" stroke-width="2" />
+              <!-- Блик на скалке -->
+              <line x1="30" y1="50" x2="70" y2="50" stroke="#fff5e6" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+            </g>
+            <!-- Звёздочки-акценты -->
+            <circle cx="24" cy="28" r="2.2" fill="#ffbe4f" />
+            <circle cx="77" cy="28" r="2.2" fill="#ffbe4f" />
+          </svg>
+        </div>
+
+        <div class="min-w-0">
+          <h1 id="cafe-title" class="text-xl sm:text-2xl font-extrabold tracking-tight text-white truncate">
+            Тесто и Сыр
+          </h1>
+          <p id="cafe-subtitle" class="text-xs sm:text-sm text-neutral-400 truncate">
+            Кафе • Выпечка • Пицца • Кофе
+          </p>
+        </div>
+      </div>
+
+      <!-- Правая часть: Кнопка корзины в шапке -->
+      <button
+        id="header-cart-btn"
+        type="button"
+        class="shrink-0 flex items-center gap-2.5 bg-brand-card hover:bg-neutral-800 active:scale-95 border border-brand-border hover:border-brand-gold/60 rounded-2xl px-3.5 py-2.5 transition cursor-pointer"
+        aria-label="Открыть корзину"
+      >
+        <div class="relative flex items-center justify-center">
+          <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span
+            id="header-cart-count"
+            class="hidden absolute -top-2 -right-2.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand-gold text-black text-[11px] font-bold flex items-center justify-center"
+          >0</span>
+        </div>
+        <div class="hidden sm:flex flex-col items-start leading-tight">
+          <span class="text-[11px] text-neutral-400">Корзина</span>
+          <span id="header-cart-total" class="text-sm font-bold text-white">0 ₽</span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== ПОИСК И ЗАКРЕПЛЁННЫЕ КАТЕГОРИИ ==================== -->
+  <div class="sticky top-0 z-30 bg-brand-bg/95 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 pt-3 pb-2.5 space-y-3">
+      <!-- Поле поиска -->
+      <div class="relative">
+        <svg class="w-5 h-5 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m1.85-5.15a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Найти блюдо: хачапури, пицца, латте..."
+          class="w-full bg-brand-surface text-white placeholder-neutral-500 border border-brand-border focus:border-brand-gold focus:outline-none rounded-2xl pl-11 pr-10 py-2.5 text-sm sm:text-base transition"
+        />
+        <button
+          id="clear-search-btn"
+          type="button"
+          class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white p-1 rounded-full"
+          aria-label="Очистить поиск"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Горизонтальная лента категорий -->
+      <nav id="category-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5" aria-label="Категории меню">
+        <!-- Вкладки генерируются автоматически через JavaScript -->
+      </nav>
+    </div>
+  </div>
+
+  <!-- ==================== ОСНОВНОЙ КОНТЕНТ: КАТАЛОГ БЛЮД ==================== -->
+  <main class="max-w-5xl mx-auto px-4 pt-5">
+    <!-- Приветственная строка с адресом -->
+    <div class="mb-5 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-neutral-400 bg-brand-surface/70 border border-brand-border rounded-2xl px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="text-brand-gold">📍</span>
+        <span>Самовывоз: <strong id="pickup-address-banner" class="text-neutral-200 font-medium">с. Ярково, ул. Советская, 4</strong></span>
+      </div>
+      <div class="text-brand-goldLight font-medium">Свежая выпечка каждый день ✨</div>
+    </div>
+
+    <!-- Контейнер для категорий и карточек блюд -->
+    <div id="menu-container" class="space-y-8">
+      <!-- Карточки товаров добавляются сюда скриптом -->
+    </div>
+
+    <!-- Заглушка, если по поиску ничего не найдено -->
+    <div id="empty-search-state" class="hidden text-center py-16 px-4 bg-brand-surface border border-brand-border rounded-3xl">
+      <div class="text-4xl mb-3">🔍</div>
+      <h2 class="text-lg font-bold text-white mb-1">Ничего не найдено</h2>
+      <p class="text-sm text-neutral-400 mb-4">Попробуйте изменить запрос или сбросить поиск.</p>
+      <button
+        id="reset-search-btn"
+        type="button"
+        class="bg-brand-gold hover:bg-brand-goldLight text-black font-semibold text-sm px-5 py-2.5 rounded-xl transition cursor-pointer"
+      >
+        Показать всё меню
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== ПОДВАЛ ==================== -->
+  <footer class="max-w-5xl mx-auto px-4 mt-12 pt-6 border-t border-brand-border text-center text-xs text-neutral-500 space-y-1">
+    <p class="text-brand-gold font-semibold text-sm">Приятного аппетита!</p>
+    <p id="footer-info">Кафе «Тесто и Сыр» • с. Ярково, ул. Советская, 4</p>
+  </footer>
+
+  <!-- ==================== ПЛАВАЮЩАЯ НИЖНЯЯ ПАНЕЛЬ КОРЗИНЫ (МОБИЛЬНЫЕ) ==================== -->
+  <div id="floating-cart-bar" class="hidden fixed bottom-4 inset-x-4 z-40 sm:hidden">
+    <button
+      id="floating-cart-btn"
+      type="button"
+      class="w-full bg-brand-gold hover:bg-brand-goldLight active:scale-[0.98] text-black font-bold rounded-2xl px-5 py-3.5 shadow-xl shadow-black/60 flex items-center justify-between transition cursor-pointer"
+    >
+      <div class="flex items-center gap-2.5">
+        <span id="floating-cart-count" class="bg-black/15 text-black text-xs font-extrabold px-2.5 py-1 rounded-xl">0 шт.</span>
+        <span class="text-sm sm:text-base">Открыть корзину</span>
+      </div>
+      <span id="floating-cart-total" class="text-base font-extrabold">0 ₽</span>
+    </button>
+  </div>
+
+  <!-- ==================== ВЫДВИЖНАЯ ПАНЕЛЬ КОРЗИНЫ ==================== -->
+  <div id="cart-overlay" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+
+  <aside
+    id="cart-drawer"
+    class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-brand-surface border-l border-brand-border shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col"
+    aria-label="Корзина заказа"
+  >
+    <!-- Шапка корзины -->
+    <div class="px-5 py-4 border-b border-brand-border flex items-center justify-between gap-2 shrink-0">
+      <div>
+        <h2 class="text-lg font-bold text-white">Ваш заказ</h2>
+        <p id="cart-items-subtitle" class="text-xs text-neutral-400">Корзина пуста</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button
+          id="clear-cart-btn"
+          type="button"
+          class="hidden text-xs text-neutral-400 hover:text-red-400 px-2.5 py-1.5 rounded-xl hover:bg-red-500/10 transition cursor-pointer"
+        >
+          Очистить
+        </button>
+        <button
+          id="close-cart-btn"
+          type="button"
+          class="p-2 rounded-xl bg-brand-card hover:bg-neutral-700 text-neutral-300 hover:text-white transition cursor-pointer"
+          aria-label="Закрыть корзину"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Прокручиваемое содержимое корзины -->
+    <div class="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+      <!-- Состояние пустой корзины -->
+      <div id="cart-empty-view" class="text-center py-12 space-y-3">
+        <div class="text-5xl">🧀</div>
+        <h3 class="text-base font-bold text-white">Пока ничего не выбрано</h3>
+        <p class="text-sm text-neutral-400 max-w-xs mx-auto">
+          Добавьте любимую выпечку, пиццу или ароматный кофе из меню.
+        </p>
+      </div>
+
+      <!-- Список выбранных товаров -->
+      <div id="cart-items-list" class="space-y-3"></div>
+
+      <!-- Форма оформления заказа (скрыта, когда корзина пуста) -->
+      <form id="checkout-form" class="hidden space-y-4 pt-3 border-t border-brand-border" novalidate>
+        <!-- Переключатель способа получения -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">
+            Способ получения
+          </label>
+          <div class="grid grid-cols-2 gap-2 p-1 bg-brand-bg rounded-2xl border border-brand-border">
+            <button
+              type="button"
+              id="mode-pickup-btn"
+              class="py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer bg-brand-gold text-black"
+            >
+              🏃 Самовывоз
+            </button>
+            <button
+              type="button"
+              id="mode-delivery-btn"
+              class="py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer text-neutral-300 hover:text-white"
+            >
+              🚗 Доставка
+            </button>
+          </div>
+          <!-- Подсказка адреса самовывоза -->
+          <p id="pickup-info-box" class="mt-2 text-xs text-neutral-300 bg-brand-card border border-brand-border rounded-xl px-3 py-2">
+            📍 Адрес самовывоза: <strong id="pickup-address-cart" class="text-brand-goldLight">с. Ярково, ул. Советская, 4</strong>
+          </p>
+        </div>
+
+        <!-- Поле адреса (появляется только при доставке) -->
+        <div id="delivery-address-group" class="hidden">
+          <label for="customer-address" class="block text-xs font-medium text-neutral-300 mb-1.5">
+            Адрес доставки <span class="text-brand-gold">*</span>
+          </label>
+          <input
+            id="customer-address"
+            type="text"
+            placeholder="Улица, дом, квартира / подъезд"
+            class="w-full bg-brand-bg text-white placeholder-neutral-500 border border-brand-border focus:border-brand-gold focus:outline-none rounded-xl px-3.5 py-2.5 text-sm transition"
+          />
+          <p id="address-error" class="hidden text-xs text-red-400 mt-1">Пожалуйста, укажите адрес для доставки.</p>
+        </div>
+
+        <!-- Имя клиента -->
+        <div>
+          <label for="customer-name" class="block text-xs font-medium text-neutral-300 mb-1.5">
+            Ваше имя
+          </label>
+          <input
+            id="customer-name"
+            type="text"
+            placeholder="Как к вам обращаться?"
+            class="w-full bg-brand-bg text-white placeholder-neutral-500 border border-brand-border focus:border-brand-gold focus:outline-none rounded-xl px-3.5 py-2.5 text-sm transition"
+          />
+        </div>
+
+        <!-- Телефон клиента -->
+        <div>
+          <label for="customer-phone" class="block text-xs font-medium text-neutral-300 mb-1.5">
+            Телефон <span class="text-brand-gold">*</span>
+          </label>
+          <input
+            id="customer-phone"
+            type="tel"
+            placeholder="+7 (999) 000-00-00"
+            class="w-full bg-brand-bg text-white placeholder-neutral-500 border border-brand-border focus:border-brand-gold focus:outline-none rounded-xl px-3.5 py-2.5 text-sm transition"
+          />
+          <p id="phone-error" class="hidden text-xs text-red-400 mt-1">Укажите номер телефона, чтобы мы могли подтвердить заказ.</p>
+        </div>
+
+        <!-- Комментарий -->
+        <div>
+          <label for="customer-comment" class="block text-xs font-medium text-neutral-300 mb-1.5">
+            Комментарий к заказу
+          </label>
+          <textarea
+            id="customer-comment"
+            rows="2"
+            placeholder="Например: без лука, к 18:30, нужна сдача с 1000 ₽"
+            class="w-full bg-brand-bg text-white placeholder-neutral-500 border border-brand-border focus:border-brand-gold focus:outline-none rounded-xl px-3.5 py-2.5 text-sm resize-none transition"
+          ></textarea>
+        </div>
+      </form>
+    </div>
+
+    <!-- Нижняя панель итогов и кнопок оформления -->
+    <div id="cart-footer" class="hidden px-5 py-4 border-t border-brand-border bg-brand-bg/90 space-y-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-neutral-400">Итого к оплате</span>
+        <span id="cart-total-sum" class="text-xl font-extrabold text-brand-goldLight">0 ₽</span>
+      </div>
+
+      <div class="space-y-2">
+        <button
+          id="order-whatsapp-btn"
+          type="button"
+          class="w-full bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-black font-bold text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition cursor-pointer shadow-lg shadow-emerald-950/40"
+        >
+          <span>💬</span>
+          <span>Отправить заказ в WhatsApp</span>
+        </button>
+
+        <button
+          id="order-copy-btn"
+          type="button"
+          class="w-full bg-brand-gold hover:bg-brand-goldLight active:scale-[0.98] text-black font-bold text-sm py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <span>📋</span>
+          <span>Скопировать текст заказа</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ / ЧЕКА ==================== -->
+  <div id="receipt-modal" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-brand-surface border border-brand-border rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span class="inline-block text-xs font-semibold text-brand-gold bg-brand-gold/10 border border-brand-gold/30 px-2.5 py-1 rounded-full mb-2">
+            Заказ сформирован
+          </span>
+          <h3 id="receipt-modal-title" class="text-lg font-bold text-white">Готовый текст заказа</h3>
+        </div>
+        <button
+          id="close-receipt-btn"
+          type="button"
+          class="p-2 rounded-xl bg-brand-card hover:bg-neutral-700 text-neutral-300 hover:text-white transition cursor-pointer"
+          aria-label="Закрыть окно"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <p id="receipt-modal-desc" class="text-xs sm:text-sm text-neutral-400">
+        Вы можете отправить этот чек в WhatsApp, Telegram или SMS.
+      </p>
+
+      <!-- Текст чека -->
+      <pre
+        id="receipt-text-preview"
+        class="bg-brand-bg border border-brand-border rounded-2xl p-4 text-xs sm:text-sm text-neutral-200 whitespace-pre-wrap font-mono max-h-64 overflow-y-auto leading-relaxed"
+      ></pre>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+        <button
+          id="receipt-copy-again-btn"
+          type="button"
+          class="bg-brand-card hover:bg-neutral-700 border border-brand-border text-white font-semibold text-sm py-2.5 px-4 rounded-xl transition cursor-pointer"
+        >
+          📋 Скопировать ещё раз
+        </button>
+        <button
+          id="receipt-done-btn"
+          type="button"
+          class="bg-brand-gold hover:bg-brand-goldLight text-black font-bold text-sm py-2.5 px-4 rounded-xl transition cursor-pointer"
+        >
+          Готово
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ (TOAST) ==================== -->
+  <div
+    id="toast"
+    class="fixed top-5 left-1/2 -translate-x-1/2 z-[70] pointer-events-none opacity-0 transition-opacity duration-300"
+  >
+    <div id="toast-message" class="bg-brand-gold text-black font-semibold text-sm px-4 py-2.5 rounded-2xl shadow-xl">
+      Уведомление
+    </div>
+  </div>
+
+  <!-- ==================== ЛОГИКА ПРИЛОЖЕНИЯ (JAVASCRIPT) ==================== -->
+  <script>
+    /**
+     * =========================================================================
+     * 1. ОСНОВНЫЕ НАСТРОЙКИ КАФЕ (CONFIG)
+     * Меняйте значения здесь, чтобы обновить название, адрес или номер WhatsApp.
+     * =========================================================================
+     */
+    const CONFIG = {
+      cafeName: 'Тесто и Сыр',
+      subtitle: 'Кафе • Выпечка • Пицца • Кофе',
+      pickupAddress: 'с. Ярково, ул. Советская, 4',
+      // Номер WhatsApp в международном формате БЕЗ плюса, пробелов и скобок (например: 79001234567)
+      whatsappPhone: '79000000000',
+      currency: '₽',
+      storageKey: 'testo_i_syr_cart_v1',
+    };
+
+    /**
+     * =========================================================================
+     * 2. СПИСОК КАТЕГОРИЙ И ПОЛНОЕ МЕНЮ (MENU_ITEMS)
+     * Чтобы изменить цену — просто поправьте число в поле price.
+     * Чтобы добавить новое блюдо — скопируйте любую строку {...}, задайте новый id,
+     * укажите category (должна совпадать с id категории ниже), name, price и emoji.
+     * =========================================================================
+     */
+    const CATEGORIES = [
+      { id: 'all', title: 'Всё меню', emoji: '✨' },
+      { id: 'bakery', title: 'Выпечка и горячее', emoji: '🧀' },
+      { id: 'pancakes', title: 'Блинчики', emoji: '🥞' },
+      { id: 'pizza', title: 'Пицца', emoji: '🍕' },
+      { id: 'chebureki', title: 'Чебуреки', emoji: '🥟' },
+      { id: 'belyashi', title: 'Беляши', emoji: '🥯' },
+      { id: 'snacks', title: 'Горячие закуски', emoji: '🌭' },
+      { id: 'coffee', title: 'Кофе зерновой', emoji: '☕' },
+    ];
+
+    const MENU_ITEMS = [
+      // --- 1. Выпечка и горячее ---
+      { id: 'bak-1', category: 'bakery', name: 'Хачапури', price: 150, emoji: '🧀' },
+      { id: 'bak-2', category: 'bakery', name: 'Хачапури по-аджарски (мал.)', price: 199, emoji: '🛶' },
+      { id: 'bak-3', category: 'bakery', name: 'Хачапури по-аджарски (бол.)', price: 399, emoji: '🛶' },
+      { id: 'bak-4', category: 'bakery', name: 'Ламаджо', price: 250, emoji: '🫓' },
+      { id: 'bak-5', category: 'bakery', name: 'Хинкали', price: 90, emoji: '🥟' },
+
+      // --- 2. Блинчики ---
+      { id: 'pan-1', category: 'pancakes', name: 'Блинчики с творогом', price: 120, emoji: '🥞' },
+      { id: 'pan-2', category: 'pancakes', name: 'Блинчики с ветчиной и сыром', price: 145, emoji: '🥞' },
+      { id: 'pan-3', category: 'pancakes', name: 'Блинчики с мясом', price: 150, emoji: '🥞' },
+      { id: 'pan-4', category: 'pancakes', name: 'Блинчики с бананом, клубникой и Нутеллой', price: 199, emoji: '🍓' },
+
+      // --- 3. Пицца ---
+      { id: 'piz-1', category: 'pizza', name: 'Пепперони Фирменная 30 см', price: 490, emoji: '🍕' },
+      { id: 'piz-2', category: 'pizza', name: 'Пепперони классика 30 см', price: 450, emoji: '🍕' },
+      { id: 'piz-3', category: 'pizza', name: 'Гавайская 30 см', price: 490, emoji: '🍍' },
+      { id: 'piz-4', category: 'pizza', name: '3 сыра 30 см', price: 490, emoji: '🧀' },
+      { id: 'piz-5', category: 'pizza', name: 'Ветчина-грибы 30 см', price: 490, emoji: '🍄' },
+      { id: 'piz-6', category: 'pizza', name: 'Ройял чизбургер 30 см', price: 490, emoji: '🍔' },
+      { id: 'piz-7', category: 'pizza', name: 'Курица терияки 30 см', price: 490, emoji: '🍗' },
+      { id: 'piz-8', category: 'pizza', name: 'Диабло 30 см', price: 490, emoji: '🌶️' },
+      { id: 'piz-9', category: 'pizza', name: 'Маргарита 30 см', price: 450, emoji: '🍅' },
+
+      // --- 4. Чебуреки ---
+      { id: 'che-1', category: 'chebureki', name: 'Чебурек с говядиной и свининой', price: 115, emoji: '🥟' },
+      { id: 'che-2', category: 'chebureki', name: 'Чебурек с сыром и зеленью', price: 115, emoji: '🧀' },
+      { id: 'che-3', category: 'chebureki', name: 'Чебурек с курицей и сыром', price: 115, emoji: '🍗' },
+      { id: 'che-4', category: 'chebureki', name: 'Чебурек с ветчиной и сыром', price: 100, emoji: '🥟' },
+      { id: 'che-5', category: 'chebureki', name: 'Чебурек с бананом и яблоком', price: 75, emoji: '🍌' },
+      { id: 'che-6', category: 'chebureki', name: 'Чебурек с вишней', price: 75, emoji: '🍒' },
+      { id: 'che-7', category: 'chebureki', name: 'Чебурек с яблоком, грушей и корицей', price: 75, emoji: '🍏' },
+
+      // --- 5. Беляши ---
+      { id: 'bel-1', category: 'belyashi', name: 'Беляш с мясом', price: 100, emoji: '🥯' },
+      { id: 'bel-2', category: 'belyashi', name: 'Беляш с мясом и капустой', price: 85, emoji: '🥯' },
+      { id: 'bel-3', category: 'belyashi', name: 'Беляш с капустой', price: 75, emoji: '🥬' },
+      { id: 'bel-4', category: 'belyashi', name: 'Беляш с картофелем и грибами', price: 85, emoji: '🍄' },
+      { id: 'bel-5', category: 'belyashi', name: 'Беляш с картофелем и беконом', price: 95, emoji: '🥓' },
+      { id: 'bel-6', category: 'belyashi', name: 'Беляш с курицей и картофелем', price: 85, emoji: '🍗' },
+
+      // --- 6. Горячие закуски ---
+      { id: 'snk-1', category: 'snacks', name: 'Хот-дог датский', price: 125, emoji: '🌭' },
+      { id: 'snk-2', category: 'snacks', name: 'Хот-дог в лаваше', price: 125, emoji: '🌯' },
+      { id: 'snk-3', category: 'snacks', name: 'Куриные крылья', price: 190, emoji: '🍗' },
+      { id: 'snk-4', category: 'snacks', name: 'Куриный попкорн', price: 180, emoji: '🍿' },
+      { id: 'snk-5', category: 'snacks', name: 'Картофель фри', price: 75, emoji: '🍟' },
+      { id: 'snk-6', category: 'snacks', name: 'Сырные палочки', price: 190, emoji: '🧀' },
+      { id: 'snk-7', category: 'snacks', name: 'Шаурма', price: 180, emoji: '🌯' },
+
+      // --- 7. Кофе зерновой ---
+      { id: 'cof-1', category: 'coffee', name: 'Американо стронг', price: 85, emoji: '☕' },
+      { id: 'cof-2', category: 'coffee', name: 'Латте 330 мл', price: 140, emoji: '🥛' },
+      { id: 'cof-3', category: 'coffee', name: 'Капучино 330 мл', price: 140, emoji: '☕' },
+    ];
+
+    /**
+     * =========================================================================
+     * 3. СОСТОЯНИЕ ПРИЛОЖЕНИЯ (STATE)
+     * Здесь хранится текущая корзина, выбранная категория, поиск и способ получения.
+     * =========================================================================
+     */
+    let state = {
+      activeCategory: 'all',
+      searchQuery: '',
+      deliveryMode: 'pickup', // 'pickup' (самовывоз) или 'delivery' (доставка)
+      cart: {},               // Объект вида { 'piz-1': 2, 'cof-2': 1 }
+      lastOrderText: '',      // Последний сформированный текст чека
+    };
+
+    // Ссылки на ключевые элементы страницы (DOM)
+    const els = {
+      cafeTitle: document.getElementById('cafe-title'),
+      cafeSubtitle: document.getElementById('cafe-subtitle'),
+      pickupAddressBanner: document.getElementById('pickup-address-banner'),
+      pickupAddressCart: document.getElementById('pickup-address-cart'),
+      footerInfo: document.getElementById('footer-info'),
+
+      searchInput: document.getElementById('search-input'),
+      clearSearchBtn: document.getElementById('clear-search-btn'),
+      resetSearchBtn: document.getElementById('reset-search-btn'),
+      categoryTabs: document.getElementById('category-tabs'),
+      menuContainer: document.getElementById('menu-container'),
+      emptySearchState: document.getElementById('empty-search-state'),
+
+      headerCartBtn: document.getElementById('header-cart-btn'),
+      headerCartCount: document.getElementById('header-cart-count'),
+      headerCartTotal: document.getElementById('header-cart-total'),
+
+      floatingCartBar: document.getElementById('floating-cart-bar'),
+      floatingCartBtn: document.getElementById('floating-cart-btn'),
+      floatingCartCount: document.getElementById('floating-cart-count'),
+      floatingCartTotal: document.getElementById('floating-cart-total'),
+
+      cartOverlay: document.getElementById('cart-overlay'),
+      cartDrawer: document.getElementById('cart-drawer'),
+      closeCartBtn: document.getElementById('close-cart-btn'),
+      clearCartBtn: document.getElementById('clear-cart-btn'),
+      cartItemsSubtitle: document.getElementById('cart-items-subtitle'),
+      cartEmptyView: document.getElementById('cart-empty-view'),
+      cartItemsList: document.getElementById('cart-items-list'),
+      checkoutForm: document.getElementById('checkout-form'),
+      cartFooter: document.getElementById('cart-footer'),
+      cartTotalSum: document.getElementById('cart-total-sum'),
+
+      modePickupBtn: document.getElementById('mode-pickup-btn'),
+      modeDeliveryBtn: document.getElementById('mode-delivery-btn'),
+      pickupInfoBox: document.getElementById('pickup-info-box'),
+      deliveryAddressGroup: document.getElementById('delivery-address-group'),
+      customerAddress: document.getElementById('customer-address'),
+      addressError: document.getElementById('address-error'),
+      customerName: document.getElementById('customer-name'),
+      customerPhone: document.getElementById('customer-phone'),
+      phoneError: document.getElementById('phone-error'),
+      customerComment: document.getElementById('customer-comment'),
+
+      orderWhatsappBtn: document.getElementById('order-whatsapp-btn'),
+      orderCopyBtn: document.getElementById('order-copy-btn'),
+
+      receiptModal: document.getElementById('receipt-modal'),
+      receiptModalTitle: document.getElementById('receipt-modal-title'),
+      receiptModalDesc: document.getElementById('receipt-modal-desc'),
+      receiptTextPreview: document.getElementById('receipt-text-preview'),
+      closeReceiptBtn: document.getElementById('close-receipt-btn'),
+      receiptCopyAgainBtn: document.getElementById('receipt-copy-again-btn'),
+      receiptDoneBtn: document.getElementById('receipt-done-btn'),
+
+      toast: document.getElementById('toast'),
+      toastMessage: document.getElementById('toast-message'),
+    };
+
+    let toastTimer = null;
+
+    /**
+     * =========================================================================
+     * 4. РАБОТА С LOCALSTORAGE (СОХРАНЕНИЕ КОРЗИНЫ)
+     * =========================================================================
+     */
+    function loadCartFromStorage() {
+      try {
+        const saved = localStorage.getItem(CONFIG.storageKey);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          // Проверяем, что загруженные товары всё ещё существуют в меню
+          const validCart = {};
+          for (const [id, qty] of Object.entries(parsed)) {
+            if (MENU_ITEMS.some((item) => item.id === id) && Number(qty) > 0) {
+              validCart[id] = Number(qty);
+            }
+          }
+          state.cart = validCart;
+        }
+      } catch (err) {
+        // Если браузер запрещает доступ к localStorage, просто начинаем с пустой корзины
+        state.cart = {};
+      }
+    }
+
+    function saveCartToStorage() {
+      try {
+        localStorage.setItem(CONFIG.storageKey, JSON.stringify(state.cart));
+      } catch (err) {
+        // Игнорируем ошибку, если память браузера недоступна
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 5. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+     * =========================================================================
+     */
+    // Форматирование цены (например: 1 250 ₽)
+    function formatPrice(amount) {
+      return `${amount.toLocaleString('ru-RU')} ${CONFIG.currency}`;
+    }
+
+    // Показ аккуратного всплывающего уведомления вместо alert()
+    function showToast(message) {
+      els.toastMessage.textContent = message;
+      els.toast.classList.remove('opacity-0');
+      els.toast.classList.add('opacity-100');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        els.toast.classList.remove('opacity-100');
+        els.toast.classList.add('opacity-0');
+      }, 2600);
+    }
+
+    // Подсчёт общего количества и суммы товаров в корзине
+    function getCartStats() {
+      let totalCount = 0;
+      let totalSum = 0;
+
+      for (const [id, qty] of Object.entries(state.cart)) {
+        const item = MENU_ITEMS.find((m) => m.id === id);
+        if (item && qty > 0) {
+          totalCount += qty;
+          totalSum += item.price * qty;
+        }
+      }
+
+      return { totalCount, totalSum };
+    }
+
+    // Склонение слова «позиция» (1 позиция, 2 позиции, 5 позиций)
+    function pluralizeItems(count) {
+      const mod10 = count % 10;
+      const mod100 = count % 100;
+      if (mod10 === 1 && mod100 !== 11) return `${count} позиция`;
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return `${count} позиции`;
+      return `${count} позиций`;
+    }
+
+    // Надёжное копирование текста в буфер обмена (работает даже внутри iframe)
+    function copyTextToClipboard(text) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, text.length);
+        const copied = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        return copied;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 6. ИЗМЕНЕНИЕ КОРЗИНЫ
+     * =========================================================================
+     */
+    function updateCartItem(itemId, delta) {
+      const currentQty = state.cart[itemId] || 0;
+      const nextQty = currentQty + delta;
+
+      if (nextQty <= 0) {
+        delete state.cart[itemId];
+      } else {
+        state.cart[itemId] = nextQty;
+      }
+
+      saveCartToStorage();
+      renderMenu();
+      renderCart();
+      updateCartBadges();
+    }
+
+    function removeCartItem(itemId) {
+      delete state.cart[itemId];
+      saveCartToStorage();
+      renderMenu();
+      renderCart();
+      updateCartBadges();
+    }
+
+    function clearCart() {
+      state.cart = {};
+      saveCartToStorage();
+      renderMenu();
+      renderCart();
+      updateCartBadges();
+      showToast('Корзина очищена');
+    }
+
+    /**
+     * =========================================================================
+     * 7. ОТРИСОВКА ИНТЕРФЕЙСА (КАТЕГОРИИ, МЕНЮ, КОРЗИНА)
+     * =========================================================================
+     */
+    function renderCategoryTabs() {
+      els.categoryTabs.innerHTML = '';
+
+      CATEGORIES.forEach((cat) => {
+        const isActive = state.activeCategory === cat.id;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = isActive
+          ? 'shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-gold text-black shadow-md shadow-brand-gold/20 transition cursor-pointer'
+          : 'shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium bg-brand-surface text-neutral-300 hover:text-white border border-brand-border hover:border-neutral-600 transition cursor-pointer';
+
+        btn.innerHTML = `<span>${cat.emoji}</span><span>${cat.title}</span>`;
+        btn.addEventListener('click', () => {
+          state.activeCategory = cat.id;
+          renderCategoryTabs();
+          renderMenu();
+          // Плавно прокручиваем к началу меню при смене вкладки
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        els.categoryTabs.appendChild(btn);
+      });
+    }
+
+    function renderMenu() {
+      const query = state.searchQuery.trim().toLowerCase();
+
+      // Фильтруем блюда по поиску и выбранной категории
+      const filteredItems = MENU_ITEMS.filter((item) => {
+        const matchesCategory = state.activeCategory === 'all' || item.category === state.activeCategory;
+        const matchesSearch = !query || item.name.toLowerCase().includes(query);
+        return matchesCategory && matchesSearch;
+      });
+
+      els.menuContainer.innerHTML = '';
+
+      if (filteredItems.length === 0) {
+        els.emptySearchState.classList.remove('hidden');
+        return;
+      }
+
+      els.emptySearchState.classList.add('hidden');
+
+      // Группируем отфильтрованные блюда по категориям в правильном порядке
+      const categoriesToShow = CATEGORIES.filter((c) => c.id !== 'all');
+
+      categoriesToShow.forEach((cat) => {
+        const itemsInCat = filteredItems.filter((item) => item.category === cat.id);
+        if (itemsInCat.length === 0) return;
+
+        const section = document.createElement('section');
+        section.className = 'space-y-3.5';
+
+        // Заголовок категории
+        section.innerHTML = `
+          <div class="flex items-center justify-between border-b border-brand-border pb-2">
+            <h2 class="text-lg sm:text-xl font-extrabold text-white flex items-center gap-2">
+              <span>${cat.emoji}</span>
+              <span>${cat.title}</span>
+            </h2>
+            <span class="text-xs font-semibold text-neutral-400 bg-brand-surface border border-brand-border px-2.5 py-0.5 rounded-full">
+              ${itemsInCat.length}
+            </span>
+          </div>
+        `;
+
+        // Сетка карточек
+        const grid = document.createElement('div');
+        grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5';
+
+        itemsInCat.forEach((item) => {
+          const qty = state.cart[item.id] || 0;
+          const card = document.createElement('article');
+          card.className = `bg-brand-card border ${
+            qty > 0 ? 'border-brand-gold/70 shadow-lg shadow-brand-gold/5' : 'border-brand-border hover:border-neutral-600'
+          } rounded-2xl p-4 flex flex-col justify-between gap-4 transition`;
+
+          // Верхняя часть карточки: иконка, категория, название
+          const topHtml = `
+            <div class="flex items-start gap-3">
+              <div class="w-12 h-12 shrink-0 rounded-2xl bg-brand-surface border border-brand-border flex items-center justify-center text-2xl select-none">
+                ${item.emoji}
+              </div>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-medium text-neutral-400 block mb-0.5">${cat.title}</span>
+                <h3 class="text-sm sm:text-base font-bold text-white leading-snug">${item.name}</h3>
+              </div>
+            </div>
+          `;
+
+          // Нижняя часть карточки: цена и кнопка «Добавить» либо счётчик
+          const actionHtml =
+            qty === 0
+              ? `
+                <button
+                  type="button"
+                  data-action="add"
+                  data-id="${item.id}"
+                  class="bg-brand-gold hover:bg-brand-goldLight active:scale-95 text-black font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition cursor-pointer"
+                >
+                  Добавить
+                </button>
+              `
+              : `
+                <div class="flex items-center gap-1 bg-brand-surface border border-brand-gold/50 rounded-xl p-1">
+                  <button
+                    type="button"
+                    data-action="dec"
+                    data-id="${item.id}"
+                    class="w-8 h-8 rounded-lg bg-brand-card hover:bg-neutral-700 text-white font-bold flex items-center justify-center transition cursor-pointer"
+                    aria-label="Уменьшить количество"
+                  >−</button>
+                  <span class="min-w-[26px] text-center text-sm font-extrabold text-brand-goldLight">${qty}</span>
+                  <button
+                    type="button"
+                    data-action="inc"
+                    data-id="${item.id}"
+                    class="w-8 h-8 rounded-lg bg-brand-gold hover:bg-brand-goldLight text-black font-bold flex items-center justify-center transition cursor-pointer"
+                    aria-label="Увеличить количество"
+                  >+</button>
+                </div>
+              `;
+
+          card.innerHTML = `
+            ${topHtml}
+            <div class="flex items-center justify-between gap-2 pt-2 border-t border-brand-border/60">
+              <span class="text-base sm:text-lg font-extrabold text-brand-goldLight">${formatPrice(item.price)}</span>
+              ${actionHtml}
+            </div>
+          `;
+
+          grid.appendChild(card);
+        });
+
+        section.appendChild(grid);
+        els.menuContainer.appendChild(section);
+      });
+    }
+
+    function updateCartBadges() {
+      const { totalCount, totalSum } = getCartStats();
+
+      // Обновляем кнопку в шапке
+      els.headerCartTotal.textContent = formatPrice(totalSum);
+      if (totalCount > 0) {
+        els.headerCartCount.textContent = totalCount;
+        els.headerCartCount.classList.remove('hidden');
+      } else {
+        els.headerCartCount.classList.add('hidden');
+      }
+
+      // Обновляем плавающую нижнюю панель на мобильных
+      if (totalCount > 0) {
+        els.floatingCartCount.textContent = `${totalCount} шт.`;
+        els.floatingCartTotal.textContent = formatPrice(totalSum);
+        els.floatingCartBar.classList.remove('hidden');
+      } else {
+        els.floatingCartBar.classList.add('hidden');
+      }
+    }
+
+    function renderCart() {
+      const { totalCount, totalSum } = getCartStats();
+      const entries = Object.entries(state.cart);
+
+      els.cartItemsList.innerHTML = '';
+
+      if (entries.length === 0) {
+        els.cartItemsSubtitle.textContent = 'Корзина пуста';
+        els.clearCartBtn.classList.add('hidden');
+        els.cartEmptyView.classList.remove('hidden');
+        els.checkoutForm.classList.add('hidden');
+        els.cartFooter.classList.add('hidden');
+        return;
+      }
+
+      els.cartItemsSubtitle.textContent = pluralizeItems(totalCount);
+      els.clearCartBtn.classList.remove('hidden');
+      els.cartEmptyView.classList.add('hidden');
+      els.checkoutForm.classList.remove('hidden');
+      els.cartFooter.classList.remove('hidden');
+      els.cartTotalSum.textContent = formatPrice(totalSum);
+
+      entries.forEach(([id, qty]) => {
+        const item = MENU_ITEMS.find((m) => m.id === id);
+        if (!item) return;
+
+        const row = document.createElement('div');
+        row.className = 'bg-brand-card border border-brand-border rounded-2xl p-3.5 flex items-center justify-between gap-3';
+
+        row.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="text-2xl shrink-0">${item.emoji}</span>
+            <div class="min-w-0">
+              <h4 class="text-sm font-semibold text-white leading-snug truncate">${item.name}</h4>
+              <p class="text-xs text-neutral-400 mt-0.5">${formatPrice(item.price)} × ${qty} = <strong class="text-brand-goldLight">${formatPrice(item.price * qty)}</strong></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 shrink-0">
+            <div class="flex items-center bg-brand-surface border border-brand-border rounded-xl p-0.5">
+              <button
+                type="button"
+                data-cart-action="dec"
+                data-id="${item.id}"
+                class="w-7 h-7 rounded-lg hover:bg-neutral-700 text-white font-bold flex items-center justify-center cursor-pointer"
+                aria-label="Уменьшить"
+              >−</button>
+              <span class="min-w-[22px] text-center text-xs font-bold text-white">${qty}</span>
+              <button
+                type="button"
+                data-cart-action="inc"
+                data-id="${item.id}"
+                class="w-7 h-7 rounded-lg hover:bg-neutral-700 text-brand-gold font-bold flex items-center justify-center cursor-pointer"
+                aria-label="Увеличить"
+              >+</button>
+            </div>
+
+            <button
+              type="button"
+              data-cart-action="remove"
+              data-id="${item.id}"
+              class="p-2 rounded-xl text-neutral-400 hover:text-red-400 hover:bg-red-500/10 transition cursor-pointer"
+              aria-label="Удалить позицию"
+              title="Удалить"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
+          </div>
+        `;
+
+        els.cartItemsList.appendChild(row);
+      });
+    }
+
+    /**
+     * =========================================================================
+     * 8. УПРАВЛЕНИЕ КОРЗИНОЙ И СПОСОБОМ ПОЛУЧЕНИЯ
+     * =========================================================================
+     */
+    function openCart() {
+      els.cartOverlay.classList.remove('hidden');
+      els.cartDrawer.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeCart() {
+      els.cartOverlay.classList.add('hidden');
+      els.cartDrawer.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    function setDeliveryMode(mode) {
+      state.deliveryMode = mode;
+
+      if (mode === 'pickup') {
+        els.modePickupBtn.className = 'py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer bg-brand-gold text-black';
+        els.modeDeliveryBtn.className = 'py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer text-neutral-300 hover:text-white';
+        els.pickupInfoBox.classList.remove('hidden');
+        els.deliveryAddressGroup.classList.add('hidden');
+        els.addressError.classList.add('hidden');
+      } else {
+        els.modeDeliveryBtn.className = 'py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer bg-brand-gold text-black';
+        els.modePickupBtn.className = 'py-2.5 px-3 rounded-xl text-sm font-semibold transition cursor-pointer text-neutral-300 hover:text-white';
+        els.pickupInfoBox.classList.add('hidden');
+        els.deliveryAddressGroup.classList.remove('hidden');
+      }
+    }
+
+    /**
+     * =========================================================================
+     * 9. ПРОВЕРКА ФОРМЫ И ФОРМИРОВАНИЕ ТЕКСТА ЗАКАЗА
+     * =========================================================================
+     */
+    function validateCheckoutForm() {
+      let isValid = true;
+      const phone = els.customerPhone.value.trim();
+      const address = els.customerAddress.value.trim();
+
+      if (!phone) {
+        els.phoneError.classList.remove('hidden');
+        els.customerPhone.focus();
+        isValid = false;
+      } else {
+        els.phoneError.classList.add('hidden');
+      }
+
+      if (state.deliveryMode === 'delivery' && !address) {
+        els.addressError.classList.remove('hidden');
+        if (isValid) els.customerAddress.focus();
+        isValid = false;
+      } else {
+        els.addressError.classList.add('hidden');
+      }
+
+      return isValid;
+    }
+
+    function buildOrderText() {
+      const { totalSum } = getCartStats();
+      const name = els.customerName.value.trim() || 'Не указано';
+      const phone = els.customerPhone.value.trim();
+      const address = els.customerAddress.value.trim();
+      const comment = els.customerComment.value.trim();
+
+      const lines = [
+        `🧀 Новый заказ — «${CONFIG.cafeName}»`,
+        '--------------------------------',
+      ];
+
+      let index = 1;
+      for (const [id, qty] of Object.entries(state.cart)) {
+        const item = MENU_ITEMS.find((m) => m.id === id);
+        if (!item) continue;
+        lines.push(`${index}. ${item.name} × ${qty} = ${formatPrice(item.price * qty)}`);
+        index++;
+      }
+
+      lines.push('--------------------------------');
+      lines.push(`💰 Итого: ${formatPrice(totalSum)}`);
+      lines.push('');
+
+      if (state.deliveryMode === 'pickup') {
+        lines.push(`🏃 Получение: Самовывоз (${CONFIG.pickupAddress})`);
+      } else {
+        lines.push(`🚗 Получение: Доставка`);
+        lines.push(`📍 Адрес: ${address}`);
+      }
+
+      lines.push(`👤 Имя: ${name}`);
+      lines.push(`📞 Телефон: ${phone}`);
+
+      if (comment) {
+        lines.push(`📝 Комментарий: ${comment}`);
+      }
+
+      return lines.join('\n');
+    }
+
+    function openReceiptModal(title, description, orderText) {
+      state.lastOrderText = orderText;
+      els.receiptModalTitle.textContent = title;
+      els.receiptModalDesc.textContent = description;
+      els.receiptTextPreview.textContent = orderText;
+      els.receiptModal.classList.remove('hidden');
+    }
+
+    function closeReceiptModal() {
+      els.receiptModal.classList.add('hidden');
+    }
+
+    function handleWhatsappOrder() {
+      if (!validateCheckoutForm()) return;
+
+      const orderText = buildOrderText();
+      const encodedText = encodeURIComponent(orderText);
+      const cleanPhone = CONFIG.whatsappPhone.replace(/\D/g, '');
+      const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedText}`;
+
+      // Открываем WhatsApp в новой вкладке
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+      // Показываем окно подтверждения с готовым чеком на случай, если мессенджер не открылся
+      openReceiptModal(
+        'Переход в WhatsApp',
+        'Если окно WhatsApp не открылось автоматически, вы можете скопировать чек ниже и отправить его вручную.',
+        orderText
+      );
+    }
+
+    function handleCopyOrder() {
+      if (!validateCheckoutForm()) return;
+
+      const orderText = buildOrderText();
+      const copied = copyTextToClipboard(orderText);
+
+      if (copied) {
+        showToast('Текст заказа скопирован!');
+      } else {
+        showToast('Выделите и скопируйте текст из окна чека');
+      }
+
+      openReceiptModal(
+        'Заказ скопирован в буфер обмена',
+        'Теперь просто вставьте этот текст в Telegram, WhatsApp или SMS и отправьте нам.',
+        orderText
+      );
+    }
+
+    /**
+     * =========================================================================
+     * 10. ПРИВЯЗКА СОБЫТИЙ И ЗАПУСК ПРИЛОЖЕНИЯ
+     * =========================================================================
+     */
+    function bindEvents() {
+      // Делегирование кликов по кнопкам «Добавить / − / +» в меню
+      els.menuContainer.addEventListener('click', (event) => {
+        const btn = event.target.closest('button[data-action]');
+        if (!btn) return;
+
+        const id = btn.dataset.id;
+        const action = btn.dataset.action;
+
+        if (action === 'add' || action === 'inc') {
+          updateCartItem(id, 1);
+        } else if (action === 'dec') {
+          updateCartItem(id, -1);
+        }
+      });
+
+      // Делегирование кликов внутри корзины
+      els.cartItemsList.addEventListener('click', (event) => {
+        const btn = event.target.closest('button[data-cart-action]');
+        if (!btn) return;
+
+        const id = btn.dataset.id;
+        const action = btn.dataset.cartAction;
+
+        if (action === 'inc') updateCartItem(id, 1);
+        if (action === 'dec') updateCartItem(id, -1);
+        if (action === 'remove') removeCartItem(id);
+      });
+
+      // Поиск
+      els.searchInput.addEventListener('input', (event) => {
+        state.searchQuery = event.target.value;
+        els.clearSearchBtn.classList.toggle('hidden', !state.searchQuery);
+        renderMenu();
+      });
+
+      const resetSearch = () => {
+        state.searchQuery = '';
+        state.activeCategory = 'all';
+        els.searchInput.value = '';
+        els.clearSearchBtn.classList.add('hidden');
+        renderCategoryTabs();
+        renderMenu();
+      };
+
+      els.clearSearchBtn.addEventListener('click', resetSearch);
+      els.resetSearchBtn.addEventListener('click', resetSearch);
+
+      // Открытие и закрытие корзины
+      els.headerCartBtn.addEventListener('click', openCart);
+      els.floatingCartBtn.addEventListener('click', openCart);
+      els.closeCartBtn.addEventListener('click', closeCart);
+      els.cartOverlay.addEventListener('click', closeCart);
+      els.clearCartBtn.addEventListener('click', clearCart);
+
+      // Переключение самовывоза и доставки
+      els.modePickupBtn.addEventListener('click', () => setDeliveryMode('pickup'));
+      els.modeDeliveryBtn.addEventListener('click', () => setDeliveryMode('delivery'));
+
+      // Скрываем ошибки валидации при вводе текста
+      els.customerPhone.addEventListener('input', () => els.phoneError.classList.add('hidden'));
+      els.customerAddress.addEventListener('input', () => els.addressError.classList.add('hidden'));
+
+      // Кнопки оформления заказа
+      els.orderWhatsappBtn.addEventListener('click', handleWhatsappOrder);
+      els.orderCopyBtn.addEventListener('click', handleCopyOrder);
+
+      // Модальное окно чека
+      els.closeReceiptBtn.addEventListener('click', closeReceiptModal);
+      els.receiptDoneBtn.addEventListener('click', () => {
+        closeReceiptModal();
+        closeCart();
+      });
+      els.receiptCopyAgainBtn.addEventListener('click', () => {
+        if (copyTextToClipboard(state.lastOrderText)) {
+          showToast('Чек скопирован ещё раз!');
+        }
+      });
+
+      // Закрытие по клавише Escape
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          if (!els.receiptModal.classList.contains('hidden')) {
+            closeReceiptModal();
+          } else {
+            closeCart();
+          }
+        }
+      });
+    }
+
+    function initApp() {
+      // Подставляем настройки из CONFIG в интерфейс
+      document.title = `${CONFIG.cafeName} — Онлайн-меню`;
+      els.cafeTitle.textContent = CONFIG.cafeName;
+      els.cafeSubtitle.textContent = CONFIG.subtitle;
+      els.pickupAddressBanner.textContent = CONFIG.pickupAddress;
+      els.pickupAddressCart.textContent = CONFIG.pickupAddress;
+      els.footerInfo.textContent = `Кафе «${CONFIG.cafeName}» • ${CONFIG.pickupAddress}`;
+
+      loadCartFromStorage();
+      renderCategoryTabs();
+      renderMenu();
+      renderCart();
+      updateCartBadges();
+      bindEvents();
+    }
+
+    // Запускаем приложение после загрузки страницы
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html> 
